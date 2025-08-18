@@ -21,8 +21,9 @@ import { cn } from '@/lib/utils';
 interface NoteCardProps {
   note: Note;
   onEdit: (note: Note) => void;
-  onDelete: (id: string) => void;
+  onDelete: (id: string, title: string) => void;
   onTogglePin: (id: string) => void;
+  onView?: (note: Note) => void;
 }
 
 export const NoteCard: React.FC<NoteCardProps> = ({
@@ -64,12 +65,12 @@ export const NoteCard: React.FC<NoteCardProps> = ({
         "group relative p-4 cursor-pointer transition-all duration-200",
         "hover:shadow-custom-md hover:bg-card-hover animate-fade-in",
         "hover:scale-[1.02] hover:-translate-y-1",
-        note.isPinned && "ring-2 ring-primary/20 bg-primary/5"
+        note.is_pinned && "ring-2 ring-primary/20 bg-primary/5"
       )}
       onClick={() => onEdit(note)}
     >
       {/* Pin indicator */}
-      {note.isPinned && (
+      {note.is_pinned && (
         <div className="absolute top-3 right-3">
           <Pin className="h-4 w-4 text-primary fill-current" />
         </div>
@@ -109,7 +110,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({
               }}
             >
               <Pin className="h-4 w-4 mr-2" />
-              {note.isPinned ? 'Unpin' : 'Pin'}
+              {note.is_pinned ? 'Unpin' : 'Pin'}
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={(e) => {
@@ -156,7 +157,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <div className="flex items-center gap-1">
           <Calendar className="h-3 w-3" />
-          <span>{formatDate(note.updatedAt)}</span>
+          <span>{formatDate(new Date(note.updated_at))}</span>
         </div>
         
         <div className="opacity-0 group-hover:opacity-100 transition-opacity">
