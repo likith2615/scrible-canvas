@@ -115,7 +115,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({
             <DropdownMenuItem
               onClick={(e) => {
                 e.stopPropagation();
-                onDelete(note.id);
+                onDelete(note.id, note.title || 'Untitled Note');
               }}
               className="text-destructive focus:text-destructive"
             >

@@ -9,20 +9,20 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Note } from '@/types/note';
+
 
 interface DeleteConfirmDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  note: Note | null;
+  noteTitle: string;
 }
 
 export const DeleteConfirmDialog: React.FC<DeleteConfirmDialogProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  note
+  noteTitle
 }) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
@@ -30,7 +30,7 @@ export const DeleteConfirmDialog: React.FC<DeleteConfirmDialogProps> = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Note</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete "{note?.title || 'Untitled Note'}"? 
+            Are you sure you want to delete "{noteTitle || 'Untitled Note'}"? 
             This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
